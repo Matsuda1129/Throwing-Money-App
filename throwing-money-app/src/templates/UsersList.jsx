@@ -7,6 +7,8 @@ import { getUserId, getUsername, getMoney } from '../reducks/users/selectors';
 import { Button } from 'react-bootstrap';
 import Modal from 'react-modal'
 
+Modal.setAppElement('#root')
+
 const customStyles = {
   content : {
     top                   : '50%',
