@@ -19,5 +19,5 @@ export const getUserId = createSelector(
 
 export const getMoney = createSelector(
   [usersSelector],
-  state => state.moeny
+  state => state.money
 );

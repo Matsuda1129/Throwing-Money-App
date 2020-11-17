@@ -14,7 +14,6 @@ export const listenAuthState = () => {
             if (!data) {
               throw new Error('ユーザーデータが存在しません。')
             }
-
             // Update logged in user state
             dispatch(signInAction({
               customer_id: (data.customer_id) ? data.customer_id : "",
@@ -24,6 +23,7 @@ export const listenAuthState = () => {
               role: data.role,
               uid: user.uid,
               username: data.username,
+              money: data.money
             }))
           })
       } else {

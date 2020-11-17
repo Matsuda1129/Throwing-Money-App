@@ -5,21 +5,28 @@ import { signOut } from "../reducks/users/operations";
 import { getUserslist } from "../reducks/userslist/selectors"
 import { getUserId, getUsername, getMoney } from '../reducks/users/selectors';
 import Modal from 'react-modal'
-import {Wallet} from "../components/Modal"
+import { Wallet, Remittance } from "../components/Modal"
 
 Modal.setAppElement('#root')
 
 const UsersList = (props) => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const users = getUserslist(selector);
+  const uid = getUserId(selector)
   const username = getUsername(selector)
-  const money = selector.money
-  // .toLocaleString()
+  const money = getMoney(selector)
+  const usersList = getUserslist(selector);
+
+  // console.log(money);
+  // console.log(uid);
+
+  const users = usersList.filter((user, index) => {
+    return user.uid !== uid;
+  });
 
   useEffect(() => {
     dispatch(fetchUsersList())
-  }, []);
+  });
 
   return (
     <section>
@@ -37,12 +44,11 @@ const UsersList = (props) => {
               <tr key={user.uid}>
                 <td>{user.username}</td>
                 <td>
-                  <button>送る</button>
+                  <Wallet name={user.username} money={user.money} />
                 </td>
-                <Wallet
-                name = {user.username}
-                money = {user.money}
-                />
+                <td>
+                  <Remittance money={user.money} />
+                </td>
               </tr>
             ))
           )}

@@ -4,7 +4,7 @@ const initialState = {
     role:"",
     uid: "",
     username: "",
-    money: null
+    money: undefined,
   },
   userslist: {
     list:[]
