@@ -4,7 +4,7 @@ import React from 'react'
 
 const Wallet = (props) => {
 
-  const [IsOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
   function openModal() {
     setIsOpen(true);
   }
@@ -16,7 +16,7 @@ const Wallet = (props) => {
   return (
     <div>
       <Modal
-        isOpen={IsOpen}
+        isOpen={isOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
         className='modal'

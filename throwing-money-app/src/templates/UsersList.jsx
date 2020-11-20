@@ -17,9 +17,6 @@ const UsersList = (props) => {
   const money = getMoney(selector)
   const usersList = getUserslist(selector);
 
-  // console.log(money);
-  // console.log(uid);
-
   const users = usersList.filter((user, index) => {
     return user.uid !== uid;
   });
@@ -47,7 +44,7 @@ const UsersList = (props) => {
                   <Wallet name={user.username} money={user.money} />
                 </td>
                 <td>
-                  <Remittance money={user.money} />
+                  <Remittance YourMoney={money} OthersMoney={user.money} YourUid={uid} OthersUid={user.uid} />
                 </td>
               </tr>
             ))
@@ -58,7 +55,7 @@ const UsersList = (props) => {
           </tr>
         </tfoot>
       </table>
-    </section>
+    </section >
   );
 };
 

@@ -109,3 +109,23 @@ export const signOut = () => {
       })
   }
 }
+
+export const saveUser = (YourUid,YourMoney) => {
+  return async (dispatch) => {
+    const timestamp = FirebaseTimestamp.now()
+
+    const data = {
+      money:YourMoney,
+      updated_at: timestamp
+    }
+    
+    if(YourUid ===""){
+      const ref = userRef.doc()
+      data.created_at = timestamp;
+      YourUid = ref.YourUid;
+      data.id = YourUid;
+    }
+
+    return userRef.doc(YourUid).set(data, {merge:true})
+  }
+}
