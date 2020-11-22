@@ -1,5 +1,4 @@
 import {db, FirebaseTimestamp} from "../../firebase";
-import {push} from "connected-react-router";
 import {fetchUsersListAction} from "./actions";
 
 const userslistRef = db.collection('users')
@@ -17,22 +16,22 @@ export const fetchUsersList = () => {
   }
 }
 
-export const saveUsersList = (OthersUid,OthersMoney) => {
+export const saveUsersList = (othersUid,othersMoney) => {
   return async (dispatch) => {
     const timestamp = FirebaseTimestamp.now()
 
     const data = {
-      money:OthersMoney,
+      money:othersMoney,
       updated_at: timestamp
     }
     
-    if(OthersUid ===""){
+    if(othersUid ===""){
       const ref = userslistRef.doc()
       data.created_at = timestamp;
-      OthersUid = ref.OthersUid;
-      data.id = OthersUid;
+      othersUid = ref.othersUid;
+      data.id = othersUid;
     }
 
-    return userslistRef.doc(OthersUid).set(data, {merge:true})
+    return userslistRef.doc(othersUid).set(data, {merge:true})
   }
 }

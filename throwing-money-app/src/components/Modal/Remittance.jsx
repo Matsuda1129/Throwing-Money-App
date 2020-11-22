@@ -19,17 +19,15 @@ const Remittance = (props) => {
     setIsOpen(false);
   }
 
-  const [sendMoney, setSendMoney] = useState("");
+  const [money, setMoney] = useState("");
   const inputMoney = useCallback((event) => {
-    setSendMoney(event.target.value)
-  }, [setSendMoney])
+    setMoney(event.target.value)
+  }, [setMoney])
 
-  const YourUid = props.YourUid
-  const OthersUid = props.OthersUid
-  // console.log(OthersUid);
-
-  const YourMoney = Number(props.YourMoney) - Number(sendMoney);
-  const OthersMoney = Number(props.OthersMoney) + Number(sendMoney);
+  const yourUid = props.yourUid
+  const othersUid = props.othersUid
+  const yourMoney = Number(props.yourMoney) - Number(money);
+  const othersMoney = Number(props.othersMoney) + Number(money);
 
   return (
     <div>
@@ -37,15 +35,15 @@ const Remittance = (props) => {
         isOpen={isOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
-        className='modal'
+        className="modal"
       >
-        <div>あなたの残高：{props.YourMoney}</div>
+        <div>あなたの残高：{props.yourMoney}</div>
         <div>送る金額</div>
         <form action="">
-          <input type="number" value={sendMoney} onChange={inputMoney} />
+          <input type="number" value={money} onChange={inputMoney} />
           <Button onClick={() => {
-            dispatch(saveUser(YourUid, YourMoney));
-            dispatch(saveUsersList(OthersUid, OthersMoney))
+            dispatch(saveUser(yourUid, yourMoney));
+            dispatch(saveUsersList(othersUid, othersMoney))
           }}>送金</Button>
         </form>
       </Modal>

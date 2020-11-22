@@ -44,7 +44,7 @@ const UsersList = (props) => {
                   <Wallet name={user.username} money={user.money} />
                 </td>
                 <td>
-                  <Remittance YourMoney={money} OthersMoney={user.money} YourUid={uid} OthersUid={user.uid} />
+                  <Remittance yourMoney={money} othersMoney={user.money} yourUid={uid} othersUid={user.uid} />
                 </td>
               </tr>
             ))
