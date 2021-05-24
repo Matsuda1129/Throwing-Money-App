@@ -14,7 +14,6 @@ export const listenAuthState = () => {
             if (!data) {
               throw new Error('ユーザーデータが存在しません。')
             }
-
             // Update logged in user state
             dispatch(signInAction({
               customer_id: (data.customer_id) ? data.customer_id : "",
@@ -24,6 +23,7 @@ export const listenAuthState = () => {
               role: data.role,
               uid: user.uid,
               username: data.username,
+              money: data.money
             }))
           })
       } else {
@@ -107,5 +107,25 @@ export const signOut = () => {
         dispatch(signOutAction());
         dispatch(push('/'))
       })
+  }
+}
+
+export const saveUser = (yourUid, yourMoney) => {
+  return async (dispatch) => {
+    const timestamp = FirebaseTimestamp.now()
+
+    const data = {
+      money:yourMoney,
+      updated_at: timestamp
+    }
+    
+    if(yourUid ===""){
+      const ref = userRef.doc()
+      data.created_at = timestamp;
+      yourUid = ref.yourUid;
+      data.id = yourUid;
+    }
+
+    return userRef.doc(yourUid).set(data, {merge:true})
   }
 }
